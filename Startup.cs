@@ -11,8 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Rpg.Models;
 
-namespace character_creator_dnd
+namespace Rpg
 {
     public class Startup
     {
@@ -26,6 +28,9 @@ namespace character_creator_dnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CharacterContext>(opt =>
+               opt.UseInMemoryDatabase("Characters"));
+
             services.AddControllers();
             
             // Register the Swagger generator, defining 1 or more Swagger documents
